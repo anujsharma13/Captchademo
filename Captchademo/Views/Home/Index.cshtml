@@ -1,0 +1,38 @@
+﻿@model Captchademo.Models.Student
+<html>
+<head>
+    <title>reCAPTCHA demo: Explicit render after an onload callback</title>
+    <script type="text/javascript">
+        var onloadCallback = function () {
+            grecaptcha.render('divcaptch', {
+                'sitekey': '6Lf38IgdAAAAAMlnxZQGwpu_Ha1lDrYEUqXJGU2-',
+                'callback': function (response) {
+                    $('#txtcaptcha').val('true');
+                }
+            });
+        };
+    </script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js">
+
+    </script>
+    <script type="text/javascript" src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+            async defer>
+    </script>
+</head>
+<body>
+    <div>
+        <form method="post" asp-action="Result" asp-controller="Home">
+            <input asp-for="@Model.Name" type="text" placeholder="Name"/>
+            <br /><br />
+            <input asp-for="@Model.id" type="text" placeholder="Id"/>
+            <br /><br />
+            <div id="divcaptch"></div>
+            <input id="txtcaptcha" type="text" style="display:none" required />
+            <br />
+            <br />
+            <input type="submit" value="submit" />
+        </form>
+    </div>
+   
+</body>
+</html>
